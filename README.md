@@ -1,135 +1,128 @@
-# 📱 Android APK Runner
+# Android APK Runner
 
-<div align="center">
+A lightweight desktop utility for running Android APK files on a PC using an Android emulator or a connected device via ADB.
 
-![Version](https://img.shields.io/badge/version-1.0-blue?style=for-the-badge)
-![Python](https://img.shields.io/badge/python-3.7+-green?style=for-the-badge)
-![License](https://img.shields.io/badge/license-MIT-orange?style=for-the-badge)
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey?style=for-the-badge)
+This project is designed for local use and testing workflows. It is not a hardened enterprise application and should be used carefully with APKs from untrusted sources.
 
-**Run Android apps and games directly on your PC with a beautiful GUI interface**
+## Features
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Download Tools](#-download-android-tools) • [FAQ](#-faq)
+- Browse and select APK files from the local machine
+- Show basic file metadata such as name, size, and modification date
+- Detect available Android SDK tools and connected devices
+- Start an Android emulator if one is available
+- Install APKs to an emulator or connected device through ADB
+- Launch a package after installation when the package name can be identified
+- Includes a small diagnostic window for troubleshooting environment issues
 
-</div>
+## Supported environments
 
----
+- Windows 10 / 11 (primary target)
+- macOS and Linux are possible in principle, but the Windows installer and common paths are the main tested paths
+- Python 3.7+
+- Android SDK Platform Tools (`adb`) and/or Android Emulator
 
-## 📖 Table of Contents
-- [Overview](#-overview)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Usage Guide](#-usage-guide)
-- [Download Android Tools](#-download-android-tools)
-- [Requirements](#-requirements)
-- [How It Works](#-how-it-works)
-- [Troubleshooting](#-troubleshooting)
-- [FAQ](#-faq)
-- [License](#-license)
+## Security notice
 
----
+This project installs APKs to real Android devices and emulators. That means it sits on a trust boundary:
 
-## 🌟 Overview
+- Only install APKs from sources you trust.
+- Do not run APKs from unknown or unverified third parties.
+- Prefer APKs with known signatures or provenance.
+- Treat the application installer as a privileged system action on Windows.
 
-Android APK Runner is a desktop application that provides a beautiful, user-friendly interface for running Android apps on your PC. Whether you want to test your own apps, play mobile games on a bigger screen, or use Android-exclusive applications, this tool makes it easy.
+This project intentionally does not perform deep APK verification or trust checks beyond basic local file handling. For production or enterprise use, add package validation, manifest parsing, and stricter user prompts.
 
-The app helps you:
-- **Browse & Select** APK files from your computer
-- **Install** them to Android emulators or connected devices
-- **Launch** apps automatically after installation
-- **Manage** multiple Android devices and emulators
+## Requirements
 
----
+- Python 3.7 or newer
+- `tkinter` support in the Python installation
+- Android SDK platform tools, including `adb`
+- Optional: Android Emulator for local AVD testing
 
-## ✨ Features
+## Installation
 
-### 📱 APK Management
-- **Browse APK Files** - Select any `.apk` file from your computer
-- **View APK Details** - See file size, name, modification date
-- **Install to Device** - One-click installation to emulators or phones
-- **Auto-Launch** - Apps automatically open after installation
-
-### 🎮 Device Control
-- **Start/Stop Emulator** - Control Android emulator directly
-- **Device Detection** - Automatically find connected devices
-- **Multi-Device Support** - Install to multiple devices at once
-- **Real-time Status** - Live indicators for ADB and emulator status
-
-### 📥 Built-in Download Center
-- **BlueStacks** - Easiest emulator (recommended for beginners)
-- **Android SDK Tools** - Lightweight ADB and Fastboot
-- **Nox Player** - Lightweight emulator option
-- **LDPlayer** - Gaming-optimized emulator
-- **Android Studio** - Full development environment
-
-### 🎨 Beautiful Interface
-- **Modern Dark Theme** with Android green accents
-- **Color-coded Console** - Success, errors, and info in different colors
-- **Status Indicators** - Live ADB and emulator status dots
-- **Progress Feedback** - Real-time installation progress
-
-### 🔒 Safe & Secure
-- **No File Deletion** - Only installs, never removes
-- **Preview Before Install** - See APK details before installing
-- **Error Handling** - Clear error messages when things go wrong
-
----
-
-## 📸 Screenshots
-
-### Main Interface
-The main window shows APK selection, device controls, and a live console output.
-
-### Download Center
-Built-in tool to download all required Android software with one click.
-
-### APK Details
-View detailed information about your APK file before installation.
-
-*(Add actual screenshots here)*
-
----
-
-## 📥 Installation
-
-### Method 1: Download Executable (Recommended)
-
-1. Go to [Releases Page](https://github.com/Neshley/apk-runner/releases)
-2. Download `APKRunner.exe`
-3. Double-click to run - no installation needed!
-
-### Method 2: Run from Source
+### Option 1: Run from source
 
 ```bash
-# Clone the repository
-git clone https://github.com/Neshley/apk-runner.git
-cd apk-runner
-
-# Run the application
-python apk_runner.py
+git clone https://github.com/Neshley/Adroid-apk-runner.git
+cd Android-apk-runner
+python src/apk_runner.py
 ```
 
-## 🔧 APK Runner - Troubleshooting Guide
+### Option 2: Use the bundled Windows installer
 
-### Quick Diagnostic
-Before troubleshooting, run the app to see console output:
-```bash
-python apk_runner.py
+From the repository root:
 
-:: Run the app
-python src\apk_runner.py
-
-:: Run diagnostic
-python src\apk_diagnostic.py
-
-:: Run the EXE
-dist\APKRunner.exe
-
-:: Build new EXE
-python -m PyInstaller --onefile --windowed --name=APKRunner src\apk_runner.py
-
-:: Install the app (as Administrator)
+```bat
 installer\installer.bat
 ```
+
+This installer copies the application to `Program Files\APK Runner` and creates desktop/start menu shortcuts, and it requires administrator rights. Use it only on a machine you trust.
+
+## Usage
+
+1. Start the app:
+
+```bash
+python src/apk_runner.py
+```
+
+2. Click `Browse APK` and select an `.apk` file.
+3. Ensure ADB is available and a device/emulator is connected.
+4. Start an Android emulator if needed.
+5. Click `Install & Run` to install the APK to the selected device.
+
+## Troubleshooting
+
+### ADB not found
+
+Install Android SDK Platform Tools and make sure `adb` is available in PATH.
+
+### Emulator not found
+
+Install Android Studio or use a device/emulator already configured on your system.
+
+### No devices connected
+
+- Start an AVD in Android Studio
+- Or connect a physical Android device via USB with USB debugging enabled
+
+### App launch fails
+
+The project currently derives a package name from the APK filename. This is a convenience heuristic and may not match the actual Android package name in the APK manifest.
+
+## Repository structure
+
+```text
+.
+├── README.md
+├── LICENSE
+├── requirements.txt
+├── requirements-dev.txt
+├── makefile.mk
+├── dist/
+├── docs/
+├── installer/
+└── src/
+    ├── apk_runner.py
+    ├── apk_diagnostic.py
+    └── main.py
+```
+
+## Notes for maintainers
+
+The project is compact and straightforward, but the main application file is large. Recommended follow-up improvements include:
+
+- parse the APK manifest instead of deriving package names from the filename
+- add APK signature or metadata validation
+- make the installer portable and less privileged
+- add automated tests and CI
+- separate the UI, Android tooling logic, and diagnostics into smaller modules
+
+## License
+
+This project is licensed under the MIT License. See `LICENSE` for details.
+
+## Project status
+
+This is a local utility for experimentation and personal use. It is functional as a simple tool for Android APK testing workflows, but it is not a fully hardened or production-grade installer.

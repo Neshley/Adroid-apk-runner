@@ -4,6 +4,14 @@ A lightweight desktop utility for running Android APK files on a PC using an And
 
 This project is designed for local use and testing workflows. It is not a hardened enterprise application and should be used carefully with APKs from untrusted sources.
 
+## Repository name notice
+
+The GitHub repository is named:
+
+https://github.com/Neshley/Adroid-apk-runner
+
+Use the exact folder name shown below when cloning and running the project. The repo name is `Adroid-apk-runner` (with `Adroid`, not `Android`).
+
 ## Features
 
 - Browse and select APK files from the local machine
@@ -45,8 +53,16 @@ This project intentionally does not perform deep APK verification or trust check
 
 ```bash
 git clone https://github.com/Neshley/Adroid-apk-runner.git
-cd Android-apk-runner
+cd Adroid-apk-runner
 python src/apk_runner.py
+```
+
+If you are running from Command Prompt on Windows, the equivalent commands are:
+
+```bat
+git clone https://github.com/Neshley/Adroid-apk-runner.git
+cd Adroid-apk-runner
+python src\apk_runner.py
 ```
 
 ### Option 2: Use the bundled Windows installer
@@ -61,18 +77,35 @@ This installer copies the application to `Program Files\APK Runner` and creates 
 
 ## Usage
 
-1. Start the app:
+1. Open a terminal in the repository folder.
+2. Start the app:
 
 ```bash
 python src/apk_runner.py
 ```
 
-2. Click `Browse APK` and select an `.apk` file.
-3. Ensure ADB is available and a device/emulator is connected.
-4. Start an Android emulator if needed.
-5. Click `Install & Run` to install the APK to the selected device.
+On Windows CMD:
+
+```bat
+python src\apk_runner.py
+```
+
+3. Click `Browse APK` and select an `.apk` file.
+4. Ensure ADB is available and a device/emulator is connected.
+5. Start an Android emulator if needed.
+6. Click `Install & Run` to install the APK to the selected device.
 
 ## Troubleshooting
+
+### Folder not found after clone
+
+Use the exact repository name:
+
+```bat
+cd Adroid-apk-runner
+```
+
+Do not use `cd Android-apk-runner` unless the folder was actually created with that name.
 
 ### ADB not found
 
